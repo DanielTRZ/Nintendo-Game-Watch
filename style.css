@@ -1,0 +1,476 @@
+:root {
+  --gold: #e8d7a7;
+  --gold-shadow: #bcae85;
+  --gold-light: #fff6da;
+  --red-case: #d3122a;
+  --nintendo-red: #c10000;
+  --red-case-dark: #820a18; /*ciemniejszy czerwony */
+}
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #121212;
+  font-family: sans-serif;
+}
+/* GŁÓWNA OBUDOWA  */
+.console {
+  width: 650px;
+  height: 350px;
+  background: #d3122a; 
+  padding: 8px; /* Lekko zwiększony */
+  border-radius: 1px; 
+  padding-top: 18px;
+  padding-bottom: 18px;
+  position: relative;
+  overflow: hidden; 
+  /* EFEKT GŁĘBOKIEJ OBUDOWY 3D */
+  box-shadow: 
+    /* 1. Cień na stole */
+    0 35px 70px rgba(0, 0, 0, 0.6),
+    /* 2. (BEVEL) - to tworzy  wypukłość */
+    inset 8px 18px 15px rgba(255, 120, 140, 0.35), /* Bardzo jasny blask góra-lewo */
+    inset -8px -18px 15px rgba(60, 0, 5, 0.7),     /* Bardzo ciemny cień dół-prawo */
+    
+    /* 3. OSTRA KRAWĘDŹ */
+    inset 2px 12px 1px rgba(255, 255, 255, 0.8),   /* Biała żyłka na samym rancie */
+    inset -2px -12px 1px rgba(0, 0, 0, 0.8),       /* Czarna żyłka na dolnym rancie */
+    
+    /* 4. SUBTELNE CIEMNIEJSZE RAMKI przy samym złotym panelu */
+    inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+/* ZŁOTY PANEL - wypełnia całą konsolę */
+.panel {
+  width: 100%;
+  height: 100%;
+  background: var(--gold);
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(255,255,255,0.05) 2px);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 4px;
+  overflow: hidden;
+}
+/* --- EKRAN I JEGO RAMKA --- */
+.screen-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bevel-frame {
+  width: 330px; /* Dopasowane do szerokości 650px */
+  height: 290px; /* Dopasowane do wysokości 350px */
+  background: var(--gold);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  border-radius: 2px;
+  /*  EFEKTY 3D: Cienie zewnętrzne i wewnętrzne dla efektu "spadku" */
+  box-shadow: 
+  -1px -1px 2px var(--gold-light),      /* Blask góra-lewo */
+    5px 5px 10px rgba(0, 0, 0, 0.2),       /* Cień dół-prawo */
+    inset 8px 8px 5px var(--gold-light),   /* Wewnętrzny blask na skosie */
+    inset -8px -8px 5px var(--gold-shadow);/* Wewnętrzny cień na skosie */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.screen-title {
+  font-size: 15px; /* Skalowanie fontu */
+  color: #333;
+  margin-bottom: 2px;
+  font-family: 'Arial ', sans-serif;
+  margin-top: -1px;
+  font-weight: 500;               
+}
+.red-display-holder {
+  width: 310px;
+  height: 290px;
+  background: var(--red-case-dark);
+  padding: 5px;
+  border-radius: 4px;
+
+    box-shadow: 
+    0 2px 2px rgba(0,0,0,0.4),            /* Cień pod przyciskiem (rzucany) */
+    inset 1px 1px 1px rgba(255,255,255,0.8), /* Błysk na górnej krawędzi */
+    inset -1px -1px 1px rgba(0,0,0,0.2);     /* Cień na dolnej krawędzi */
+  filter: brightness(1.1);
+}
+.glass-screen {
+  width: 100%;
+  height: 100%;
+  background: #050505;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+  border-radius: 1px;
+}
+.nintendo-badge {
+  margin-top: 2px;
+}
+.pill {
+  border: 3px solid #333;
+  padding: 1px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+}
+/* TWORZYMY CZERWONĄ RAMKĘ W KSZTAŁCIE KRZYŻA */
+.dpad-mount {
+  width: 98px;
+  height: 99px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent; 
+  /* JEDEN WSPÓLNY CIEŃ DLA CAŁEGO KSZTAŁTU KRZYŻA */
+  filter: 
+    drop-shadow(4px 6px 16px rgba(0,0,0,0.3))
+    drop-shadow(-1px -1px 1px rgba(255,255,255,0.3));
+
+}
+/* WSPÓLNY STYL DLA CZERWONYCH BELEK */
+.mount-bar-v, .mount-bar-h {
+  position: absolute;
+  background: var(--red-case-dark);
+  /* To daje ten piękny efekt ze zdjęcia 1 */
+  border-radius: 4px; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: brightness(1.1);
+}
+/* CZERWONA BELKA PIONOWA */
+.mount-bar-v {
+  width: 42%;   /* Grubość pionowej czerwonej ramki */
+  height: 100%;
+
+}
+/* CZERWONA BELKA POZIOMA */
+.mount-bar-h {
+  width: 100%;
+  height: 42%;  /* Grubość poziomej czerwonej ramki */
+}
+
+/* CZARNY KRZYŻAK */
+.dpad {
+  width: 90px; 
+  height: 90px;
+  background: transparent; /* Przezroczyste, kształt zrobią belki */
+  position: relative;
+  /* cień zadziała na obie belki naraz dzięki filter */
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.8));
+}
+/* WSPÓLNY STYL DLA BELEK KRZYŻAKA */
+.dpad-bar-v, .dpad-bar-h {
+  position: absolute;
+  background: #1a1a1a;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ZWĘŻASZ RAMIONA */
+.dpad-bar-v {
+  width: 29%;   
+  height: 100%;
+}
+
+.dpad-bar-h {
+  width: 100%;
+  height: 29%; 
+}
+/* Wspólny styl dla wszystkich strzałek */
+.arrow {
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  display: block;
+  z-index: 5;
+  /* delikatny blask na dole, co sugeruje dolną krawędź wyżłobienia */
+  filter: drop-shadow(1px 1px 6px rgba(255,255,255,0.1));
+  opacity: 0.9; /* Lekkie stopienie z plastikiem */
+}
+.arrow::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  /* ZMIANA: Ciemniejszy kolor wnętrza grota */
+  border-bottom: 9px solid #080808; 
+      box-shadow: 
+    /* Cień wewnętrzny na górze (tworzy wgłębienie) */
+    inset 12px 12px 14px rgba(0, 0, 0, 0.8),
+    /* Delikatny odblask na dolnej krawędzi dołka */
+    inset -1px -1px 2px rgba(255, 255, 255, 0.1),
+    /* Zewnętrzny cień (opcjonalnie, by wygładzić przejście) */
+    1px 1px 1px rgba(255, 255, 255, 0.05);
+ 
+}
+/* Tworzenie trzonka (prostokąta) */
+.arrow::after {
+  content: '';
+  position: absolute;
+  top: 9px; left: 50%;
+  transform: translateX(-50%);
+  width: 13px; /* Lekko zwężamy trzonek */
+  height: 10px;
+  /* ZMIANA: Ciemniejszy kolor wnętrza trzonka */
+  background: #080808;
+      box-shadow: 
+    /* Cień wewnętrzny na górze (tworzy wgłębienie) */
+    inset 12px 12px 14px rgba(0, 0, 0, 0.8),
+    /* Delikatny odblask na dolnej krawędzi dołka */
+    inset -1px -1px 2px rgba(255, 255, 255, 0.1),
+    /* Zewnętrzny cień (opcjonalnie, by wygładzić przejście) */
+    1px 1px 1px rgba(255, 255, 255, 0.05);
+  
+}
+/* --- EDYCJA KAŻDEJ STRZAŁKI OSOBNO --- */
+.arrow.up { top: 4px; left: 50%; transform: translateX(-50%); }
+.arrow.down { bottom: 4px; left: 50%; transform: translateX(-50%) rotate(180deg); }
+.arrow.left { left: 4px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+.arrow.right { right: 4px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+/* ŚRODKOWE KÓŁKO (WGŁĘBIENIE) */
+/* ŚRODKOWE KÓŁKO (WGŁĘBIENIE) */
+.dpad::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  
+  /* 1.gradient  ciemniejszy, by sugerował dno dołka */
+  background: #0a0a0a; 
+  
+  border-radius: 50%;
+  
+  /* 2. Odwrócone cienie dla efektu wklęsłości */
+  box-shadow: 
+    /* Cień wewnętrzny na górze (tworzy wgłębienie) */
+    inset 12px 12px 14px rgba(0, 0, 0, 0.8),
+    /* Delikatny odblask na dolnej krawędzi dołka */
+    inset -1px -1px 2px rgba(255, 255, 255, 0.1),
+    /* Zewnętrzny cień (opcjonalnie, by wygładzić przejście) */
+    1px 1px 1px rgba(255, 255, 255, 0.05);
+}
+.side-area { 
+  width: 150px; 
+  padding: 20px 10px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: space-around;
+}
+
+/* Kontener logotypu - czarna ramka */
+
+.logo-box {
+  /* Zmniejszamy padding, by ramka była ciaśniejsza  */
+  border: 1.5px solid #222;
+  padding: 2px 6px ; 
+  display: inline-flex;
+  border-radius: 6px; /* Oryginał ma dość mocno zaokrąglone rogi ramki */
+  text-align: center;
+  background: transparent;
+  flex-direction: column;
+  background-color: #e2e5e7;
+  margin-bottom: 100px;
+  transform:scalex(0.9);
+  align-items: center;
+}
+
+.logo-text {
+  /* Zmiana czcionki na taką, która ma głębokie szpice w M i W */
+  font-size: 21px;
+  font-weight: 900;
+  color: #222;
+  line-height: 0.8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  /* Lekkie rozciągnięcie w poziomie */
+  display: flex;
+  align-items: baseline;
+  transform: scaleY(1.2);
+  margin-top: 3px;
+  margin:0;
+   font-family: "Century Gothic", sans-serif;
+  
+} 
+
+.logo-text span {
+  display: block;
+  font-size: 16px;
+  /* Szeryfowy ampersand  */
+  font-family:  "Century Gothic", sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  margin: 2px 0;
+  transform: scaleX(1.2);
+}
+/* Trik dla litery M */
+.deep-m {
+  display: inline-block !important;
+  font-size: 21px !important;
+  transform: scaleY(1.5);/* Rozciągamy mocno w górę i dół */
+  margin-right: 1px; /* Korekta odstępu po skalowaniu */
+  margin-bottom: 1px  !important;
+  font-weight: 600 !important;
+}
+
+/* Trik dla litery W */
+.deep-w {
+  display: inline-block !important;
+  font-size: 21px !important;
+  transform: scaleY(1.5);    /* Rozciągamy w pionie */
+  transform-origin: bottom;  /* Trzymamy dół na miejscu, by góra "urosła" */
+  margin-right: -1px;        /* Zbliżamy do litery A */
+  font-weight: 600 !important;
+}
+.deep-m {
+  transform-origin: top; /* Góra zostaje, dół rośnie do linii bazowej */
+}
+.deep-w {
+  transform-origin: bottom; /* Dół zostaje, góra rośnie do limitu */
+}
+/*  ampersand */
+.ampersand {
+  font-family: "Georgia", serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 21px;
+  margin: -2px 0; /* Przybliża napisy do siebie */
+  color: #222;
+}
+.system-buttons { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+  align-items: center; 
+}
+.sys-btn-wrap { 
+  font-size: 8px; 
+  font-weight: bold; 
+  text-align: center; 
+  color:var(--red-case-dark); 
+}
+.s-btn { 
+  width: 26px; 
+  height: 15px; 
+ 
+  border:5px solid var(--red-case-dark); 
+  border-top-color: #9c1525;    /* Jaśniejsza góra ramki */
+  border-left-color: #9c1525;   /* Jaśniejszy lewy bok ramki */
+  border-bottom-color: #3d040a; /* Bardzo ciemny dół ramki */
+  border-right-color: #3d040a;  /* Bardzo ciemny prawy bok ramki */
+  border-radius: 18px; 
+  margin-bottom: 2px;
+  margin-right: 60px;
+  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+  box-shadow: 
+    0 2px 2px rgba(0,0,0,0.4),            /* Cień pod przyciskiem (rzucany) */
+    inset 1px 1px 1px rgba(255,255,255,0.8), /* Błysk na górnej krawędzi */
+    inset -1px -1px 1px rgba(0,0,0,0.2);     /* Cień na dolnej krawędzi */
+  filter: brightness(1.1);
+}
+.action-buttons { 
+  display: flex; 
+  gap: 14px; 
+  margin-top: 100px;
+}
+.btn-red { 
+  width: 40px; 
+  height: 40px; 
+  /* Gradient: jaśniejszy na górze, ciemniejszy na dole */
+  background: radial-gradient(circle at 35% 35%, #ff5f5f 0%, #b31020 70%, #800000 100%); 
+  border-radius: 50%; 
+  /* Kolor ramki wokół guzika */
+  border: 6px solid var(--red-case-dark); 
+  border-top-color: #9c1525;   /* Jaśniejsza góra ramki */
+  border-left-color: #9c1525;   /* Jaśniejszy lewy bok ramki */
+  border-right-color: #801c26 ; /* Bardzo ciemny dół ramki */
+  border-bottom-color: #801c26; /* Bardzo ciemny dół ramki */
+  margin-bottom: 20px;
+  position: relative;
+  /* EFEKT 3D: */
+  box-shadow: 
+    /* 1. Cień rzucany na obudowę pod przyciskiem */
+  1 1px 1px rgba(0, 0, 0, 0.4),
+    /* 2. Jasny odblask na krawędzi  */
+    inset 1px 1px 1px rgba(0, 0, 0, 0.4),
+    /* 3. Głęboki cień wewnątrz przycisku na dole */
+    inset -1px -1px 1px rgba(0, 0, 0, 0.5);
+  /* przejście przy klikaniu */
+  transition: transform 0.1s;
+  cursor: pointer;
+  filter: brightness(1.1);
+}
+/* EFEKT KLIKNIĘCIA  */
+.btn-red:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.6);
+}
+.a-btn-wrap { 
+  font-weight: bold; 
+  font-size: 14px; 
+  text-align: center;
+
+}
+.sys-label {
+  display: block;
+  font-size: 9px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 60px;
+} 
+.btn-pause {
+  width: 26px; 
+  height: 15px; 
+  background: #ddd; 
+  border:5px solid var(--red-case-dark); 
+  border-top-color: #9c1525;    /* Jaśniejsza góra ramki */
+  border-left-color: #9c1525;   /* Jaśniejszy lewy bok ramki */
+  border-bottom-color: #3d040a; /* Bardzo ciemny dół ramki */
+  border-right-color: #3d040a;  /* Bardzo ciemny prawy bok ramki */
+  
+  border-radius: 18px; 
+  margin-bottom: 1px;
+  margin-left: 6px;
+  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+  box-shadow: 
+    0 2px 2px rgba(0,0,0,0.4),            /* Cień pod przyciskiem (rzucany) */
+    inset 1px 1px 1px rgba(255,255,255,0.8), /* Błysk na górnej krawędzi */
+    inset -1px -1px 1px rgba(0,0,0,0.2);     /* Cień na dolnej krawędzi */
+  filter: brightness(1.1);
+}
+.action-label-b{
+position: absolute; /* Wyciąga guzik z normalnego układu */
+  top: 310px;         /* Odległość od góry pudełka */
+  left: 83%;
+  transform: translateX(-10%); /* Centrowanie w poziomie */
+}
+.action-label-a{
+position: absolute; /* Wyciąga guzik z normalnego układu */
+  top: 310px;         /* Odległość od góry pudełka */
+  left: 93%;
+  transform: translateX(-10%); /* Centrowanie w poziomie */
+}
+.pill sup {
+  font-size: 8px;       /* Zmniejszenie rozmiaru R */
+  font-weight: normal;  /* R  grubość */
+  vertical-align: top;  /* ustawienie w pionie */
+  position: relative;
+  top: 2px;             /*góra/dół */
+  left: 1px;            /* Odzunięcie od napisu nintendo */
+}
