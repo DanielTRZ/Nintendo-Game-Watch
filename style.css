@@ -62,8 +62,8 @@ body {
   align-items: center;
 }
 .bevel-frame {
-  width: 330px; /* Dopasowane do szerokości 650px */
-  height: 290px; /* Dopasowane do wysokości 350px */
+  width: 330px; /* Dopasowane do szerokości 330px */
+  height: 290px; /* Dopasowane do wysokości 290px */
   background: var(--gold);
   position: relative;
   display: flex;
@@ -118,7 +118,7 @@ body {
   font-size: 13px;
   color: #333;
 }
-/* TWORZYMY CZERWONĄ RAMKĘ W KSZTAŁCIE KRZYŻA */
+/* CZERWONA RAMKA W KSZTAŁCIE KRZYŻA */
 .dpad-mount {
   width: 98px;
   height: 99px;
@@ -475,3 +475,4 @@ position: absolute; /* Wyciąga guzik z normalnego układu */
   left: 1px;            /* Odzunięcie od napisu nintendo */
 
 }
+
